@@ -1,0 +1,4 @@
+# The default .bashrc for the system
+distro.bash
+# Modifications to bashrc specific to this system
+local.bash
