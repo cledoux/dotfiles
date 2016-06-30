@@ -1,0 +1,27 @@
+# Charles LeDoux
+# Screen customization file
+# This file is in the public domain
+# Last Edit: July 17, 2012
+
+# Turn off splash screen
+startup_message off
+# Set scroll back buffer size
+defscrollback 30000
+# Set caption and status line
+#caption splitonly "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
+caption always "%?%F%{= Bk}%? %t %{= kB} %h%= %?%F%{= Bk}%:%{= wk}%? %n "
+hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m/%d %{W}%c %{g}]'
+# Bind movement keys to navigate displays
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+# From http://www4.informatik.uni-erlangen.de/~jnweiger/screen-faq.html
+# # Q: My xterm scrollbar does not work with screen.
+# # A: The problem is that xterm will not allow scrolling if the alternate 
+# text buffer is selected. The standard definitions of the termcap 
+# initialize capabilities ti and te switch to and from the alternate text 
+# buffer. (The scrollbar also does not work when you start e.g. ‘vi’). You 
+# can tell screen not to use these initialisations by adding the line 
+# “termcapinfo xterm ti@:te@” to your ~/.screenrc file.
+termcapinfo xterm ti@:te@
