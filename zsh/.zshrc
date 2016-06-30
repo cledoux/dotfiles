@@ -287,6 +287,8 @@ zplug "horosgrisa/autoenv"
 # between the two are, but the above looks simpler, so I went
 # with it.
 # zplug "Tarrasch/zsh-autoenv"
+# Install and source the git secret app
+zplug "sobolevn/git-secret"
 
 #
 # Make it pretty!
