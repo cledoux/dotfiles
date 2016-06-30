@@ -1,0 +1,3 @@
+https://github.com/rbenv/rbenv
+
+Manually install, do not sync.
