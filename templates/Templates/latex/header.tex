@@ -1,0 +1,157 @@
+% Modeline and header {{{
+% vim: set foldtext=foldtext() foldmarker={{{,}}} foldmethod=marker spell:
+% }}}
+
+% Packages {{{
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage[square,comma,numbers,sort]{natbib} % Natbib is much more awesome for citations
+\usepackage{graphicx} % Include pictures
+\usepackage{grffile} % extends the file name processing of package graphics 
+                     % to support a larger range 
+\usepackage{listings} % Allows easy use of code in papers.
+\usepackage{amssymb,amsmath,amsthm} % Equations and theorems
+\usepackage{centernot} % For negating symbols
+\usepackage{url}
+\usepackage{longtable}
+\usepackage{comment} % enable block comments
+\usepackage[colorinlistoftodos]{todonotes} % enable pretty todos
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage[unicode=true]{hyperref}
+% Configure tables
+\usepackage{booktabs} % Fancy formatting of table lines
+\usepackage{longtable}
+\usepackage[tableposition=top,font={small,it}]{caption}
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{algpseudocode}
+% }}}
+
+% New commands {{{
+
+% Syntax cheatsheet:
+%    \let\newmacro\oldmacro
+%       Creates an alias between \newmacro and \oldmacro
+%
+%    \def \newcommand {macro expansion}
+%       Creates a new macros that expands to `macro expansion`.
+%       If anything even slightly complicated (such as parameters)
+%       is needed, use \newcommand instead. \newcommand is a LaTex
+%       wrapper around \def
+%
+%    \newcommand{\newcommand}[args (opt)]{command execution}
+%       Create a new macro. If args is given, must be integer
+%       between 0 and 9 and is number of arguments. If no args
+%       omit brackets entirely. Args accessible as #1, #2, etc.
+
+%etal stuff is not fun to type
+\newcommand{\etal}{~et~al.\ } % Regular etal
+\newcommand{\etalc}{~et~al.~} % Etal followed by citation
+\newcommand{\etalp}{~et~al.} % Etal followed by punctuation
+
+%Define \strong as the analog to \emph
+\let\strong\textbf
+
+% This is here mainly as documentation for the various styles of letters.
+% Calligraphic 
+\def \cD {\mathcal{D}}
+% Blackboard
+\def \bD {\mathbb{D}} 
+% Fraktur
+\def \fD {\mathfrak{D}}
+
+% Various common set denotations.
+% Probability
+\def \P {\mathbb{P}}
+% Real numbers
+\def \R {\mathbb{R}}
+\def \reals {\mathbb{R}}
+% Counting numbers
+\def \C {\mathbb{C}}
+
+%Not implies
+\newcommand{\notimplies}{\centernot\implies}
+
+% Typeset C++
+\newcommand{\cplusplus}{{\rm C\raise.5ex\hbox{\small ++}} }
+
+% Annotation commands.
+\newcommand{\added}[1]{\todo[color=green!40]{#1}}
+
+% }}}
+
+% New environments {{{
+\newenvironment{packed_itemize}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+
+\newenvironment{packed_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+% }}}
+
+
+% Configurations {{{
+
+% Theorem Environments {{{
+% http://en.wikibooks.org/wiki/LaTeX/Theorems
+\theoremstyle{definition}
+\newtheorem{defenv}{Definition}
+\theoremstyle{theorem}
+%}}}
+% listings
+\lstset{
+    captionpos=b,
+    basicstyle=\scriptsize
+}
+
+
+% Automatically set image width on included graphics.
+% If graphic is wider than \linewidth, will set width to \linewidth
+% otherwise, just use the existing image width.
+\makeatletter
+\setkeys{Gin}{width=\ifdim\Gin@nat@width>\linewidth
+    \linewidth
+\else
+    \Gin@nat@width
+\fi}
+\makeatother
+
+% hyperref
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy
+\hypersetup{
+    pdfborder={0 0 0},
+    breaklinks=true,
+    colorlinks,
+    linkcolor={black},
+    citecolor={black},
+    filecolor={black},
+    urlcolor={black},
+    pdfauthor={Charles LeDoux},
+    pdftitle={\thetitle},
+    pdfsubject={\thedocumenttype},
+    pdfkeywords={\theauthor, \thedocumenttype},
+    pdfstartpage={1}
+}
+
+
+
+% url style            
+\urlstyle{same}  % don't use monospace font for urls
+
+% Margins
+% \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+% }}}
+

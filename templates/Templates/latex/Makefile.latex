@@ -1,0 +1,33 @@
+# Main makefile for building latex documents.
+# Relies on Makefile.include from
+# https://raw.github.com/ransford/pdflatex-makefile/master/Makefile.include
+
+# Name of the main .tex file without the .tex extension.
+TARGET=main
+FORMAT=pdf
+OUTDIR=build
+OUT=dissertation
+CMD=latexmk -$(FORMAT) -outdir=$(OUTDIR) -jobname=$(OUT)
+
+.PHONY: all pvc view zotero force remake clean nuke cleanall
+
+all:
+	$(CMD) $(TARGET)
+
+pvc:
+	$(CMD) --pvc $(TARGET)
+
+view: all
+	xdg-open $(OUTDIR)/$(OUT).$(FORMAT)
+
+force:
+	$(CMD) -g $(TARGET)
+
+remake:
+	$(CMD) -gg $(TARGET)
+
+clean:
+	$(CMD) -c $(TARGET)
+
+cleanall nuke:
+	$(CMD) -C $(TARGET)
