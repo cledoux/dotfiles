@@ -1,0 +1,32 @@
+# vim: noexpandtab: 
+[user]
+	name = Charles LeDoux
+	email = charles.a.ledoux@gmail.com
+[alias]
+	unadd = reset HEAD
+	subup = submodule foreach "git checkout master; git pull"
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[init]
+	templatedir = ~/.git_template
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+[push]
+	default = simple
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[status]
+	submoduleSummary = true
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[interactive]
+	singlekey = true
