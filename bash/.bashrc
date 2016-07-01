@@ -23,6 +23,12 @@ HISTFILESIZE=2000
 # Reset PATH to standard locations.
 PATH="$HOME/bin:$HOME/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
+# Directory containing stow packages for building
+# the local directory.
+LOCAL_STOW="$HOME/Dropbox/local/stow"
+
+GOPATH="$HOME/Dropbox/local/gocode"
+
 # Preferred defaults
 EDITOR=vim
 

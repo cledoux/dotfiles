@@ -8,19 +8,33 @@ zsh_dir="$HOME/.config/zsh"
 # Set up shell environment here so that later
 # commands will have access to full path.
 
+# Easy access to directory storing local environment.
+# Treat $LOCAL as a local root ('/')
+export LOCAL="$HOME/local"
+
+# Directory containing stow packages for building
+# the local directory.
+export LOCAL_STOW="$HOME/Dropbox/local/stow"
+
+export EDITOR='vim'
+export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man"
+export WINEARCH=win32
+export GOPATH="$HOME/Dropbox/local/gocode"
+
 # PATH {{{
 #
 # Hand build PATH
+# Set up last so we have access to the other env variables.
 #
 
 # Start with system directories only.
 path=(/usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/games /usr/local/games)
 
 # ~/local/bin given precedence over system binaries
-path=($HOME/local/bin $path)
+path=($HOME/local/bin $LOCAL/usr/bin $path)
 
 # Gocode binaries
-path+=$HOME/Dropbox/system-config/gocode/bin
+path+=$GOPATH/bin
 
 # Give anaconda python precedence
 path=($HOME/local/opt/anaconda3/bin $path)
@@ -30,17 +44,6 @@ path+="/opt/logstash/bin"
 
 export PATH
 # }}}
-
-# Easy access to directory storing local environment.
-# Treat $LOCAL as a local root ('/')
-export LOCAL="$HOME/local"
-
-export EDITOR='vim'
-export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man"
-#export TERM=xterm-256color
-#export SHELL=/usr/bin/zsh
-export WINEARCH=win32
-export GOPATH="$HOME/Dropbox/local/gocode"
 
 # Set the colors to use for ls
 if [ -x /usr/bin/dircolors ]; then
