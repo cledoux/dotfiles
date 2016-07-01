@@ -30,3 +30,10 @@
 	prompt = false
 [interactive]
 	singlekey = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+[credential]
+	helper = cache --timeout 30000
+	helper = lastpass
