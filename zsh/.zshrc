@@ -17,7 +17,7 @@ export LOCAL="$HOME/local"
 export LOCAL_STOW="$HOME/Dropbox/local/stow"
 
 export EDITOR='vim'
-export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man"
+export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man:$HOME/Dropbox/local/gocode/man"
 export WINEARCH=win32
 export GOPATH="$HOME/Dropbox/local/gocode"
 
