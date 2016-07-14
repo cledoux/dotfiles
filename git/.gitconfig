@@ -1,12 +1,10 @@
-# vim: noexpandtab: 
+# vim: noexpandtab:
 [user]
 	name = Charles LeDoux
 	email = charles.a.ledoux@gmail.com
 [alias]
 	unadd = reset HEAD
 	subup = submodule foreach "git checkout master; git pull"
-	lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [init]
 	templatedir = ~/.git_template
 [core]
@@ -37,3 +35,5 @@
 [credential]
 	helper = cache --timeout 30000
 	helper = lastpass
+[commit]
+	template = ~/.gitmessage
