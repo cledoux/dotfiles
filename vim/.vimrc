@@ -109,7 +109,7 @@ Plug 'amperser/proselint' , {'rtp': '/plugins/vim/syntastic_proselint'}
 " Using full git url so can push changes directly.
 " Otherwise vim-plug uses an https url
 Plug 'git@github.com:cledoux/vim-togglecopy.git'
-Plug 'git@github.com:cledoux/vim-configuration.git'
+Plug 'git@bitbucket.org:cledoux/cledoux-vim-plugin.git'
 
 " File finding
 " There's a binding I have that is conflicting with this plugin
