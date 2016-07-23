@@ -574,6 +574,19 @@ docker_gui_setup() {
     echo 'docker run --rm -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e "XAUTHORITY=$XAUTH" -e "DISPLAY=$DISPLAY" <docker image>'
 }
 
+# Use CTRL-Z to jump back and forth between vim quickly.
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # }}}
 
 # Oh-My-Zsh Copied Plugins {{{
