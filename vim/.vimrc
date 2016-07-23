@@ -32,8 +32,6 @@ call plug#begin('~/.vim/plugged')
 
 " Colorschemes
 Plug 'altercation/vim-colors-solarized'
-" Highlighting is a terrible green.
-" Plug 'chriskempson/base16-vim'
 
 " Better statusline
 Plug 'vim-airline/vim-airline'
@@ -68,9 +66,11 @@ Plug 'majutsushi/tagbar'
 Plug 'jiangmiao/auto-pairs'
 
 " Completion
-Plug 'Valloric/YouCompleteMe', {'for': 'python', 'do': './install.py'}
+" Plug 'Valloric/YouCompleteMe', {'for': 'python', 'do': './install.py'}
 " Testing out neocomplete.
 " Plug 'Shougo/neocomplete.vim'
+" Make sure rope is disabled in python-mode.
+Plug 'davidhalter/jedi-vim'
 
 " Utilisnips engine.
 " vim-snippets provides the actual snippets.
@@ -360,30 +360,6 @@ au Filetype tex let b:AutoPairs={'(':')', '[':']', '{':'}'}
 
 " }}}
 
-" Latex-Box {{{
-
-let g:LatexBox_Folding=1
-" Set to 0 to disable automatic recalculation of folds on every save.
-" Can manually recompute folds with <leader>lf or :LatexFold
-let g:LatexBox_fold_automatic=1
-" I'm used to the zx command, so preserve it.
-map zx <leader>lf
-
-
-" }}}
-
-" YouCompleteMe {{{
-" Do not load YCM for these filetypes.
-let g:ycm_filetype_blacklist = {
-    \ 'tex'   : 1,
-    \ 'latex' : 1,
-    \ 'text'  : 1
-\}
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-" }}}
-
 " Tag List Plugin {{{
 map <silent> <leader>l :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
@@ -492,6 +468,11 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 " }}}
 
+" Jedi-vim {{{
+" Don't automatically popup anything.
+let g:jedi#popup_on_dot = 0
+" }}}
+
 " Python Mode {{{
 " disable syntax checker and let syntastic handle it instead.
 let g:pymode_lint = 0
@@ -506,6 +487,18 @@ let g:pymode_rope_completion = 0
 " }}}
 
 " Archived Plugin Options {{{
+
+" YouCompleteMe {{{
+" Do not load YCM for these filetypes.
+let g:ycm_filetype_blacklist = {
+    \ 'tex'   : 1,
+    \ 'latex' : 1,
+    \ 'text'  : 1
+\}
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+" }}}
 
 " {{{ DelimitMate
 " let delimitMate_expand_cr = 1
