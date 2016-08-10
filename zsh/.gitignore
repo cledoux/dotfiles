@@ -1,7 +1,0 @@
-# The default .bashrc for the system
-distro.zsh
-# Modifications to bashrc specific to this system
-local.zsh
-
-# Ignore zgen's cache
-zgen-cache
