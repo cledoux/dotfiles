@@ -282,6 +282,8 @@ set splitright
 " of putting something into the clipboard that I want to paste and
 " then deleting text in vim, overwriting the clipboard
 " set clipboard=unnamedplus
+" Put only a single space after periods
+set nojoinspaces
 " }}}
 
 " }}}
