@@ -26,7 +26,7 @@
 
 CURRENT_BG='NONE'
 PRIMARY_FG=black
-SSH_FG=magenta 
+SSH_FG=magenta
 
 # Characters
 function {
@@ -143,11 +143,21 @@ prompt_status() {
   [[ -n ${symbols} ]] && prompt_segment ${PRIMARY_FG} default " ${symbols} "
 }
 
+# Python virtual environment status.
+prompt_venv() {
+  # Assume $VIRTUAL_ENV set if in venv.
+  if [ "x$VIRTUAL_ENV" != 'x' ]; then
+    RPROMPT='hi there '
+    prompt_segment ${PRIMARY_BG}cyan ${PRIMARY_FG} "(venv: `basename \"$VIRTUAL_ENV\"`)"
+  fi
+}
+
 ## Main prompt
 prompt_eriner_main() {
   RETVAL=$?
   CURRENT_BG='NONE'
   prompt_status
+  prompt_venv
   prompt_context
   prompt_dir
   prompt_git
