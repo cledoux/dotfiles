@@ -21,6 +21,9 @@ export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man:$HOME/
 export WINEARCH=win32
 export GOPATH="$HOME/Dropbox/local/gocode"
 
+# Directory containing the google cloud sdk
+export GCLOUDSDK="$HOME/Dropbox/local/opt/google-cloud-sdk"
+
 # PATH {{{
 #
 # Hand build PATH
@@ -41,6 +44,11 @@ path=($HOME/local/opt/anaconda3/bin $path)
 
 # Logstash
 path+="/opt/logstash/bin"
+
+# GCloud binaries
+if [[ -d  "$GCLOUDSDK/bin" ]]; then
+    path+="$GCLOUDSDK/bin"
+fi
 
 export PATH
 # }}}
@@ -106,6 +114,7 @@ setopt ALWAYS_TO_END
 
 # Turn fancy completion on
 autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 
 #
 # completion module options
@@ -646,5 +655,17 @@ colorize_via_pygmentize() {
 }
 
 # }}}
+
+# }}}
+
+# {{{ GCloud Configuration
+export GCLOUD_PROJECT=virusbattle-142920
+export CLOUDSDK_PYTHON=python2.7
+
+# Path to binaries should already be set up at top of this file.
+
+if [[ -e "$GCLOUDSDK"/completion.bash.inc ]]; then
+    source "$GCLOUDSDK/completion.bash.inc"
+fi
 
 # }}}
