@@ -116,8 +116,10 @@ Plug 'git@bitbucket.org:cledoux/cledoux-vim-plugin.git'
 " Plug 'kien/ctrlp.vim'
 
 " Create the emacs 'kill-ring'
-" Disabled until neovim fixes its clipboard errors.
+" Supposedly works under vim, throws clipboard errors on nvim.
 " Plug 'vim-scripts/YankRing.vim'
+" Only works under nvim
+" Plug 'bfred/nvim-miniyank'
 
 " Vim Sessions
 " I'm currently using tmux-ressurrect to save all state.
