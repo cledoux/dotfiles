@@ -28,10 +28,10 @@ filetype plugin indent on
 
 " Plugins {{{
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim_plugins')
 
 " Colorschemes
-Plug 'altercation/vim-colors-solarized'
+Plug 'flazz/vim-colorschemes'
 
 " Better statusline
 Plug 'vim-airline/vim-airline'
@@ -64,6 +64,9 @@ Plug 'majutsushi/tagbar'
 
 " Auto close delimeters (),[],{{{}}}, etc
 Plug 'jiangmiao/auto-pairs'
+
+" Create markdown tables with ease.
+Plug 'dhruvasagar/vim-table-mode'
 
 " Completion
 " Plug 'Valloric/YouCompleteMe', {'for': 'python', 'do': './install.py'}
@@ -108,7 +111,7 @@ Plug 'amperser/proselint' , {'rtp': '/plugins/vim/syntastic_proselint'}
 " My customizations
 " Using full git url so can push changes directly.
 " Otherwise vim-plug uses an https url
-Plug 'git@github.com:cledoux/vim-togglecopy.git'
+Plug 'https://github.com/cledoux/vim-togglecopy.git'
 Plug 'git@bitbucket.org:cledoux/cledoux-vim-plugin.git'
 
 " File finding
@@ -199,9 +202,9 @@ set ttymouse=xterm2
 " Set number of colors before setting color scheme
 " Solarized required setting to 16.
 " Alternative is 256
-set t_Co=16
-let g:solarized_termcolors=16
-colorscheme solarized
+"set t_Co=16
+"let g:solarized_termcolors=16
+colorscheme molokai
 set background=dark
 
 " Turn on line numbers
@@ -250,6 +253,11 @@ set wrap
 set textwidth=72
 " Break lines based on breakat value
 set linebreak
+" }}}
+
+" Formatting Options {{{ 
+" Do not break already too long lines
+set formatoptions+=l
 " }}}
 
 " Alt-key fix {{{
@@ -400,8 +408,8 @@ let g:airline#extensions#tabline#enabled = 1
 " In vim-airline, only display "hunks" if the diff is non-zero
 let g:airline#extensions#hunks#non_zero_only = 1
 " Manually set the color theme because I hate that damn yellow.
-let g:airline_theme='solarized'
-"let g:airline_theme='molokai'
+" let g:airline_theme='solarized'
+let g:airline_theme='molokai'
 " Required after having changed the colorscheme
 hi clear SignColumn
 " }}}

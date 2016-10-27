@@ -24,6 +24,12 @@ export GOPATH="$HOME/Dropbox/local/gocode"
 # Directory containing the google cloud sdk
 export GCLOUDSDK="$HOME/Dropbox/local/opt/google-cloud-sdk"
 
+# Turn off that damn cow
+export ANSIBLE_NOCOWS=1
+
+# secrets.py
+export PYTHONPATH="$HOME/.config/libcloud"
+
 # PATH {{{
 #
 # Hand build PATH
@@ -465,8 +471,7 @@ alias glgm='git log --graph --max-count=10'
 alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glog='git log --oneline --decorate --graph'
-alias gloga='git log --oneline --decorate --graph --all'
+alias glog='git log --oneline --decorate --graph --all'
 alias gm='git merge'
 alias gp='git push'
 alias gpd='git push --dry-run'
@@ -528,6 +533,17 @@ alias rc='rsync-copy'
 alias rsync-move="rsync -avz --progress -h --remove-source-files"
 alias rsync-update="rsync -avzu --progress -h"
 alias rsync-sync="rsync -avzu --delete --progress -h"
+# }}}
+
+alias sl='sl -e'
+
+# Vagrant/Ansible/GCloud Aliases {{{
+# Vagrant ansible
+VAGRANT_DEFAULT_KEY=.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
+alias van="ANSIBLE_HOST_KEY_CHECKING=False ansible --inventory=${VAGRANT_DEFAULT_KEY}"
+alias van-playbook="ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory=${VAGRANT_DEFAULT_KEY}"
+alias gan="ANSIBLE_HOST_KEY_CHECKING=False ansible --private-key=$HOME/.ssh/google_compute_engine"
+alias gan-playbook="ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key=$HOME/.ssh/google_compute_engine"
 # }}}
 
 # }}}
@@ -667,5 +683,13 @@ export CLOUDSDK_PYTHON=python2.7
 if [[ -e "$GCLOUDSDK"/completion.bash.inc ]]; then
     source "$GCLOUDSDK/completion.bash.inc"
 fi
+
+# if type "kubectl" > /dev/null; then
+#     source <(kubectl completion zsh)
+#     # Workaround for https://github.com/kubernetes/kubernetes/issues/27538
+#     complete -o nospace -o default -F _python_argcomplete "gcloud"
+#     complete -o default -F _bq_completer bq
+#     complete -o nospace -F _python_argcomplete gsutil
+# fi
 
 # }}}
