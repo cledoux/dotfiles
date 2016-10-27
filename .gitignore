@@ -5,3 +5,7 @@ tags
 private/.ssh/config
 private/.pypirc
 private/.gem/credentials
+
+# Generated files
+*.pyc
+__pycache__
