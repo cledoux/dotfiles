@@ -1,7 +1,7 @@
 # vim: noexpandtab:
 [user]
 	name = Charles LeDoux
-	email = charles.a.ledoux@gmail.com
+	email = charles@ledoux.email
 [alias]
 	unadd = reset HEAD
 	subup = submodule foreach "git checkout master; git pull"
