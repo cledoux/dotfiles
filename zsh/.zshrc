@@ -10,25 +10,14 @@ zsh_dir="$HOME/.config/zsh"
 
 # Easy access to directory storing local environment.
 # Treat $LOCAL as a local root ('/')
-export LOCAL="$HOME/local"
-
-# Directory containing stow packages for building
-# the local directory.
-export LOCAL_STOW="$HOME/Dropbox/local/stow"
+export LOCAL="$HOME/.local"
 
 export EDITOR='vim'
-export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man:$HOME/Dropbox/local/gocode/man"
+export MANPATH="$MANPATH:$LOCAL/man:$LOCAL/share/man:$LOCAL/usr/share/man"
 export WINEARCH=win32
-export GOPATH="$HOME/Dropbox/local/gocode"
-
-# Directory containing the google cloud sdk
-export GCLOUDSDK="$HOME/Dropbox/local/opt/google-cloud-sdk"
 
 # Turn off that damn cow
 export ANSIBLE_NOCOWS=1
-
-# secrets.py
-export PYTHONPATH="$HOME/.config/libcloud"
 
 # PATH {{{
 #
@@ -36,25 +25,8 @@ export PYTHONPATH="$HOME/.config/libcloud"
 # Set up last so we have access to the other env variables.
 #
 
-# Start with system directories only.
-path=(/usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/games /usr/local/games)
-
-# ~/local/bin given precedence over system binaries
-path=($HOME/local/bin $LOCAL/usr/bin $path)
-
-# Gocode binaries
-path+=$GOPATH/bin
-
-# Give anaconda python precedence
-path=($HOME/local/opt/anaconda3/bin $path)
-
-# Logstash
-path+="/opt/logstash/bin"
-
-# GCloud binaries
-if [[ -d  "$GCLOUDSDK/bin" ]]; then
-    path+="$GCLOUDSDK/bin"
-fi
+# Local bin given precedence over system binaries
+path=($LOCAL/bin $LOCAL/usr/bin $path)
 
 export PATH
 # }}}
@@ -505,10 +477,6 @@ alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 # set up right.
 alias yup=' TF_CMD=$(TF_ALIAS=yup PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
 
-# Emacs
-alias em='emacs -nw'
-alias emrc='emacs -nw ~/Dropbox/system-config/emacs.d/init.el'
-
 # Always use vim
 alias vi="vim"
 
@@ -671,25 +639,5 @@ colorize_via_pygmentize() {
 }
 
 # }}}
-
-# }}}
-
-# {{{ GCloud Configuration
-export GCLOUD_PROJECT=virusbattle-142920
-export CLOUDSDK_PYTHON=python2.7
-
-# Path to binaries should already be set up at top of this file.
-
-if [[ -e "$GCLOUDSDK"/completion.bash.inc ]]; then
-    source "$GCLOUDSDK/completion.bash.inc"
-fi
-
-# if type "kubectl" > /dev/null; then
-#     source <(kubectl completion zsh)
-#     # Workaround for https://github.com/kubernetes/kubernetes/issues/27538
-#     complete -o nospace -o default -F _python_argcomplete "gcloud"
-#     complete -o default -F _bq_completer bq
-#     complete -o nospace -F _python_argcomplete gsutil
-# fi
 
 # }}}
