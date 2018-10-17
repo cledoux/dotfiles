@@ -6,15 +6,13 @@
 set -euf -o pipefail
 IFS=$'\n\t'
 
-STOW=$HOME/local/bin/stow
-
 # List packages to stow.
 # Grabs all directories out of the current directory.
 # Ignores the '.' indicator, all .git* directories, and ./bin.
 packages=$(find . -maxdepth 1 -type d ! -name '.git*' ! -name '.' !  -name 'bin' -printf "%f\n")
 
 for p in $packages; do
-    $STOW $@ $p
+    stow $@ $p
 done
 
 echo "Done."
