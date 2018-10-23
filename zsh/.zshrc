@@ -232,10 +232,13 @@ fi
 
 source $ZPLUG_HOME/init.zsh
 
+# Let zplug manage itself.
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 # Plugins {{{
 
 # If a plugin gives and error "command not found: compdeg",
-# add `nice:10` option.
+# add `defer:2` option.
 #
 # A number of plugins are commented out because I don't use
 # them, but think they are cool and wanted to record them.
@@ -257,21 +260,21 @@ source $ZPLUG_HOME/init.zsh
 #
 # Fix input
 #
-zplug "$zsh_dir/lib/key-bindings.zsh", from:local
+zplug "$zsh_dir/lib/key-bindings", from:local
 
 #
 # zsh-users plugins
 #
 # syntax-highlighting must be loaded before history-substring-search
-zplug "zsh-users/zsh-syntax-highlighting", nice:0
-zplug "zsh-users/zsh-history-substring-search", nice:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:0
+zplug "zsh-users/zsh-history-substring-search", defer:1
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions", nice:19  # Always load last
+zplug "zsh-users/zsh-completions", defer:3  # Always load last
 
 #
 # Utility
 #
-# zplug "yonchu/vimman", nice:10 # Replaced by solarized-man
+# zplug "yonchu/vimman", defer:2 # Replaced by solarized-man
 zplug "horosgrisa/autoenv"
 # Here's another autoenv plugin. I don't know what the difference
 # between the two are, but the above looks simpler, so I went
@@ -284,7 +287,7 @@ zplug "sobolevn/git-secret"
 # Make it pretty!
 #
 zplug "zlsun/solarized-man" # Optimized for solarized dark
-zplug "$zsh_dir/themes/cledoux.zsh-theme", from:local # My custom theme
+zplug "$zsh_dir/themes/cledoux", from:local, as:theme # My custom themes
 # zplug "Tarrasch/zsh-colors" # color commands. ex: red hi
 
 # }}}
@@ -589,7 +592,7 @@ bindkey '^Z' fancy-ctrl-z
 # inline to prevent having to pull in all of OMZ just for that
 # simple plugin.
 #
-# zplug "plugins/git", from:oh-my-zsh, nice:10
+# zplug "plugins/git", from:oh-my-zsh, defer:2
 # zplug "plugins/git-extras", from:oh-my-zsh
 
 # fasd {{{
