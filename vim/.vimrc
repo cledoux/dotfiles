@@ -1,9 +1,9 @@
-" Modeline and Notes {{{ 
-" vim: set foldmarker={{{,}}} foldmethod=marker foldlevel=0 spell: 
+" Modeline and Notes {{{
+" vim: set foldmarker={{{,}}} foldmethod=marker foldlevel=0 spell:
 "
 "   Author: Charles LeDoux
 "
-"   This is my personal .vimrc.  Use at your own risk. 
+"   This is my personal .vimrc.  Use at your own risk.
 "
 "   The only things that should go in this file are global configurations
 "   and plugin options. Plugin options need to be set here so they'll take
@@ -12,10 +12,19 @@
 "
 "   This file is in the public domain.
 "
-"   Suggestions and bugs can be emailed to charles@charlesledoux.com 
+"   Suggestions and bugs can be emailed to charles@ledoux.email
 " }}}
 
-" Load vim-plug {{{
+" Allow local configurations.
+" Note that this file will overwrite options stored in local.
+" Purpose of this was to allow me to source my company's provided
+" vimrc without committing it to version control. I want my
+" configuration to overwrite the company's configuration.
+if !empty(glob("~/.vimrc_local"))
+    source "~/.vimrc_local"
+endif
+
+" Install vim-plug if it is missing {{{
 if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!mkdir -p ~/.vim/autoload'
     execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
@@ -49,14 +58,14 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Put git info in statusline
 Plug 'airblade/vim-gitgutter'
 
-" File exploration in VIM!
-Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs', {'on': 'NERDTreeToggle'}
+" " File exploration in VIM!
+" Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs', {'on': 'NERDTreeToggle'}
 
 " Syntax checking
 Plug 'scrooloose/syntastic'
 
-" Use zeal from vim.
-Plug 'KabbAmine/zeavim.vim'
+" " Use zeal from vim.
+" Plug 'KabbAmine/zeavim.vim'
 
 " Turn on tag (ctags) support
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
@@ -73,11 +82,11 @@ Plug 'dhruvasagar/vim-table-mode'
 " Testing out neocomplete.
 " Plug 'Shougo/neocomplete.vim'
 " Make sure rope is disabled in python-mode.
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 
 " Utilisnips engine.
 " vim-snippets provides the actual snippets.
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " Surround is one of the most useful vim plugins ever.
 Plug 'tpope/vim-surround'
@@ -86,7 +95,7 @@ Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 
 " Turn vim into a super-duper python editor.
-Plug 'klen/python-mode'
+" Plug 'klen/python-mode'
 
 " Latex editing goodness
 " Plug 'LaTeX-Box-Team/LaTeX-Box'
@@ -112,7 +121,7 @@ Plug 'amperser/proselint' , {'rtp': '/plugins/vim/syntastic_proselint'}
 " Using full git url so can push changes directly.
 " Otherwise vim-plug uses an https url
 Plug 'https://github.com/cledoux/vim-togglecopy.git'
-Plug 'git@bitbucket.org:cledoux/cledoux-vim-plugin.git'
+" Plug 'git@bitbucket.org:cledoux/cledoux-vim-plugin.git'
 
 " File finding
 " There's a binding I have that is conflicting with this plugin
@@ -210,7 +219,7 @@ set background=dark
 " Turn on line numbers
 set number
 " Put name of file in title
-set title 
+set title
 " Turn on syntax highlighting
 " Turn off with syntax off
 syntax enable
@@ -235,17 +244,17 @@ set hlsearch
 " Indentation and Wrapping {{{
 " Copy indentation from previous line
 " Will not interfere with file type based
-" indentation.  Do not use smartindent or 
+" indentation.  Do not use smartindent or
 " cindent as these can interfere with
 " file type based indentation
-set autoindent 
+set autoindent
 " Set tab character width
-set tabstop=4 
+set tabstop=4
 set softtabstop=4
 " Indent width for autoindent
-set shiftwidth=4 
+set shiftwidth=4
 " Expand tabs to spaces.
-set expandtab 
+set expandtab
 " Softwrap on lines when needed
 set wrap
 " Default textwidth
@@ -255,34 +264,34 @@ set textwidth=72
 set linebreak
 " }}}
 
-" Formatting Options {{{ 
+" Formatting Options {{{
 " Do not break already too long lines
 set formatoptions+=l
 " }}}
 
-" Alt-key fix {{{
-" http://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
-if ! has('gui_running')
-    let c='a'
-    while c <= 'z'
-      exec "set <A-".c.">=\e".c
-      exec "imap \e".c." <A-".c.">"
-      let c = nr2char(1+char2nr(c))
-    endw
-
-    set timeout ttimeoutlen=50
-endif
-
-" }}}
+" " Alt-key fix {{{
+" " http://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
+" if ! has('gui_running')
+"     let c='a'
+"     while c <= 'z'
+"       exec "set <A-".c.">=\e".c
+"       exec "imap \e".c." <A-".c.">"
+"       let c = nr2char(1+char2nr(c))
+"     endw
+"
+"     set timeout ttimeoutlen=50
+" endif
+"
+" " }}}
 
 " Completion {{{
-set completeopt="menu,preview"
-set wildmenu
+" set completeopt="menu,preview"
+" set wildmenu
 " }}}
 
 " Misc {{{
-" Ignore warnings on compiling
-set errorformat^=%-G%f:%l:\ warning:%m
+" " Ignore warnings on compiling
+" set errorformat^=%-G%f:%l:\ warning:%m
 " Use central location for meta files
 set directory=~/.backup//,/tmp//,.
 " Vertical splits go right
@@ -301,9 +310,9 @@ set nojoinspaces
 " Key Mappings {{{
 " Set the leader key
 let mapleader="\<Space>"
-" Map fd to exit to normal mode
-" This is chosen to match spacemacs
-inoremap fd <ESC>
+" " Map fd to exit to normal mode
+" " This is chosen to match spacemacs
+" inoremap fd <ESC>
 " Toggle folds
 map , za
 " Remove current highlighting of search words
@@ -347,8 +356,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-" Allow saving of files as sudo when I forgot to start vim using sudo.
-cmap w!! w !sudo tee > /dev/null %
 " Turn on full backspace support
 set backspace=indent,eol,start
 " }}}
@@ -368,7 +375,7 @@ let g:tex_flavor='latex'
 
 " Turn off quotes autopairs for tex files. Let custom quotes functions take
 " over.
-au Filetype tex let b:AutoPairs={'(':')', '[':']', '{':'}'} 
+au Filetype tex let b:AutoPairs={'(':')', '[':']', '{':'}'}
 
 " }}}
 
@@ -390,11 +397,11 @@ let g:pandoc#biblio#use_bibtool = 1
 let g:pandoc#syntax#conceal#use = 0
 "}}}
 
-" Utilisnips {{{
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-"}}}
+" " Utilisnips {{{
+" let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" "}}}
 
 " Airline {{{
 " Always show status line
@@ -414,43 +421,43 @@ let g:airline_theme='molokai'
 hi clear SignColumn
 " }}}
 
-" {{{ NERDTree 
+" {{{ NERDTree
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 "let g:nerdtree_tabs_open_on_console_startup = 0
 " }}}
 
-" {{{ Syntastic
-" ----- scrooloose/syntastic settings -----
-" Fancy!
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-" Config for latex
-augroup mySyntastic
- au!
- au FileType tex let b:syntastic_mode = "passive"
-augroup END
-" Use python3 checker
-let g:syntastic_python_python_exec = "python3"
-" Select checkers
-let g:syntastic_python_checkers = ['python', 'pylama']
-" Turn off line too long warnings
-let g:syntastic_python_pylama_args='--ignore=E501'
-" Recommended defaults for beginners
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" Turn on prose lint for tex and markdown files.
-let g:syntastic_tex_checkers = ['chktex', 'lacheck', 'proselint']
-"let g:syntastic_markdown_checkers = ['mdl', 'proselint']
-
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" }}}
+" " {{{ Syntastic
+" " ----- scrooloose/syntastic settings -----
+" " Fancy!
+" let g:syntastic_error_symbol = '✘'
+" let g:syntastic_warning_symbol = "▲"
+" " Config for latex
+" augroup mySyntastic
+"  au!
+"  au FileType tex let b:syntastic_mode = "passive"
+" augroup END
+" " Use python3 checker
+" let g:syntastic_python_python_exec = "python3"
+" " Select checkers
+" let g:syntastic_python_checkers = ['python', 'pylama']
+" " Turn off line too long warnings
+" let g:syntastic_python_pylama_args='--ignore=E501'
+" " Recommended defaults for beginners
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" " Turn on prose lint for tex and markdown files.
+" let g:syntastic_tex_checkers = ['chktex', 'lacheck', 'proselint']
+" "let g:syntastic_markdown_checkers = ['mdl', 'proselint']
+"
+" let g:syntastic_always_populate_loc_list = 1
+" "let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" " }}}
 
 " {{{ Tags (ctags) support
 " ----- xolox/vim-easytags settings -----
@@ -480,37 +487,37 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <M-\> :TmuxNavigatePrevious<cr>
 " }}}
 
-" Jedi-vim {{{
-" Don't automatically popup anything.
-let g:jedi#popup_on_dot = 0
-" }}}
+" " Jedi-vim {{{
+" " Don't automatically popup anything.
+" let g:jedi#popup_on_dot = 0
+" " }}}
 
-" Python Mode {{{
-" disable syntax checker and let syntastic handle it instead.
-let g:pymode_lint = 0
-let g:pymode_lint_write = 0
-" Turn off rope functionality
-let g:pymode_rope = 0
-" Let YouCompleteMe handle completions
-let g:pymode_rope_completion = 0
-
-" }}}
+" " Python Mode {{{
+" " disable syntax checker and let syntastic handle it instead.
+" let g:pymode_lint = 0
+" let g:pymode_lint_write = 0
+" " Turn off rope functionality
+" let g:pymode_rope = 0
+" " Let YouCompleteMe handle completions
+" let g:pymode_rope_completion = 0
+"
+" " }}}
 
 " }}}
 
 " Archived Plugin Options {{{
 
-" YouCompleteMe {{{
-" Do not load YCM for these filetypes.
-let g:ycm_filetype_blacklist = {
-    \ 'tex'   : 1,
-    \ 'latex' : 1,
-    \ 'text'  : 1
-\}
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-" }}}
+" " YouCompleteMe {{{
+" " Do not load YCM for these filetypes.
+" let g:ycm_filetype_blacklist = {
+"     \ 'tex'   : 1,
+"     \ 'latex' : 1,
+"     \ 'text'  : 1
+" \}
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" nnoremap <leader>jd :YcmCompleter GoTo<CR>
+" " }}}
 
 " {{{ DelimitMate
 " let delimitMate_expand_cr = 1
@@ -638,7 +645,7 @@ endif
 let g:neocomplete#sources#omni#input_patterns.tex =
     \ '\v\\\a*(ref|cite)\a*([^]]*\])?\{([^}]*,)*[^}]*'
 
-" Gets citation completion working with \input 
+" Gets citation completion working with \input
 let g:vimtex_complete_recursize_bib = 1
 
 " Turn folding on by default
