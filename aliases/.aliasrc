@@ -1,0 +1,165 @@
+# vim: foldmethod=marker foldmarker={{{,}}} tw=65:
+# This file is sourced by both bashrc and zshrc.
+# Lets me define aliases in a single place
+
+# Common Aliases {{{
+# Based on OMZ Common Aliases Plugin
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
+
+# ls {{{
+alias ls='ls --color=auto' # I prefer this over --color=tty
+alias l='ls -lFh'          #size,show type,human readable
+alias la='ls -lAFh'        #long list,show almost all,show type,human readable
+alias lr='ls -tRFh'        #sorted by date,recursive,show type,human readable
+alias lt='ls -ltFh'        #long list,sorted by date,show type,human readable
+alias ll='ls -lh'          #long list
+alias ldot='ls -ld .*'
+alias lS='ls -1FSsh'
+alias lart='ls -1Fcart'
+alias lrt='ls -1Fcrt'
+alias lsperm="stat -c '%A %a %n'" # List octal form of permissions
+alias l.='ls -d .* --color=auto' # Show hidden files.
+# }}}
+
+# Quick access rc files {{{
+alias bashrc='$EDITOR ~/.bashrc'
+alias zshrc='$EDITOR ~/.zshrc'
+alias vimrc='$EDITOR ~/.vimrc'
+# }}}
+
+# Searching {{{
+alias grep='grep --color'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
+alias fd='find . -type d -name'
+alias ff='find . -type f -name'
+# }}}
+
+# Better time
+alias time='/usr/bin/time -f "%C\nTime: %E real,\t%U user,\t%S sys\nSize: %K memory,\t%t set size,\t%X shared text\nCPU: %P"'
+
+alias t='tail -f'
+
+# Command line head / tail shortcuts
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L="| less"
+alias -g M="| most"
+alias -g LL="2>&1 | less"
+alias -g CA="2>&1 | cat -A"
+alias -g NE="2> /dev/null"
+alias -g NUL="> /dev/null 2>&1"
+alias -g P="2>&1| pygmentize -l pytb"
+
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
+
+alias h='history'
+alias hgrep="fc -El 0 | grep"
+alias help='man'
+alias p='ps -f'
+alias sortnr='sort -n -r'
+alias unexport='unset'
+
+alias whereami=display_info
+
+# Interactive copy/move {{{
+# rm not present because rm drives me nuts.
+alias cp='cp -i'
+alias mv='mv -i'
+# }}}
+
+# }}}
+
+# Lists the ten most used commands.
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+# Tmux {{{
+alias tmux='tmux -2'  # Force 256 colors
+alias ta='tmux attach -t'
+alias ts='tmux new-session -s'
+alias tl='tmux list-sessions'
+alias tk='tmux kill-server'
+# }}}
+
+# Git {{{
+
+# Cherry picked from OMZ git plugin.
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
+
+alias g='git'
+alias ga='git add'
+alias gc='git commit -v'
+alias gcl='git clone --recursive'
+alias gcm='git checkout master'
+alias gco='git checkout'
+alias gd='git diff'
+alias gf='git fetch'
+alias gfa='git fetch --all --prune'
+alias gg='git gui citool'
+alias gl='git pull'
+alias glg='git log --stat'
+alias glgp='git log --stat -p'
+alias glgg='git log --graph'
+alias glgga='git log --graph --decorate --all'
+alias glgm='git log --graph --max-count=10'
+alias glo='git log --oneline --decorate'
+alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+alias glog='git log --oneline --decorate --graph --all'
+alias gm='git merge'
+alias gp='git push'
+alias gpd='git push --dry-run'
+alias gr='git remote'
+alias gra='git remote add'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase -i'
+alias grbm='git rebase master'
+alias grbs='git rebase --skip'
+alias grh='git reset HEAD'
+alias grhh='git reset HEAD --hard'
+alias grmv='git remote rename'
+alias grrm='git remote remove'
+alias grset='git remote set-url'
+alias gsb='git status -sb'
+alias gss='git status -s'
+alias gst='git status'
+alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
+
+# }}}
+
+# Always use vim
+# On redhat, vimx is the vim with gui support
+if [ -e /usr/bin/vimx ]; then
+    alias vi='vimx'
+    alias vim='vimx'
+else
+    # Never use vi, always vim
+    alias vi='vim'
+fi
+
+# Ack
+alias ack='ack-grep'
+
+# Let scheme use readline
+alias scheme='rlwrap -rc mit-scheme'
+
+# Use system sqlite3 instead of the anaconda one that doesn't support
+# readline
+alias sqlite3='/usr/bin/sqlite3'
+alias sqlite="sqlite3"
+
+# Rsync {{{
+# Stolen without shame from oh-my-zsh rsync plugin
+# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rsync/rsync.plugin.zsh
+#
+alias rsync-copy="rsync -avz --progress -h"
+alias rc='rsync-copy'
+alias rsync-move="rsync -avz --progress -h --remove-source-files"
+alias rsync-update="rsync -avzu --progress -h"
+alias rsync-sync="rsync -avzu --delete --progress -h"
+# }}}
+
+alias sl='sl -e'

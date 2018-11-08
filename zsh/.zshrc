@@ -3,6 +3,10 @@
 # Location of additional files for zsh
 zsh_dir="$HOME/.config/zsh"
 
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+
 # Define Shell Environment {{{
 #
 # Set up shell environment here so that later
@@ -113,6 +117,7 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' users root $USER
 
 # directories
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -269,7 +274,7 @@ zplug "$zsh_dir/lib/key-bindings", from:local
 zplug "zsh-users/zsh-syntax-highlighting", defer:0
 zplug "zsh-users/zsh-history-substring-search", defer:1
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions", defer:3  # Always load last
+# zplug "zsh-users/zsh-completions", defer:3  # Always load last
 
 #
 # Utility
@@ -281,7 +286,7 @@ zplug "horosgrisa/autoenv"
 # with it.
 # zplug "Tarrasch/zsh-autoenv"
 # Install and source the git secret app
-zplug "sobolevn/git-secret"
+# zplug "sobolevn/git-secret"
 
 #
 # Make it pretty!
@@ -302,220 +307,6 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
-
-# }}}
-
-# Aliases {{{
-
-# Common Aliases {{{
-# Based on OMZ Common Aliases Plugin
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
-
-# ls {{{
-alias ls='lscolor' # Allows default to be overwritten and reset easily.
-alias lscolor='ls --color=auto' # I prefer this over --color=tty
-alias l='ls -lFh'          #size,show type,human readable
-alias la='ls -lAFh'        #long list,show almost all,show type,human readable
-alias lr='ls -tRFh'        #sorted by date,recursive,show type,human readable
-alias lt='ls -ltFh'        #long list,sorted by date,show type,human readable
-alias ll='ls -lh'          #long list
-alias ldot='ls -ld .*'
-alias lS='ls -1FSsh'
-alias lart='ls -1Fcart'
-alias lrt='ls -1Fcrt'
-alias lsperm="stat -c '%A %a %n'" # List octal form of permissions
-alias l.='ls -d .* --color=auto' # Show hidden files.
-# }}}
-
-# Quick access rc files {{{
-alias bashrc='$EDITOR ~/.bashrc'
-alias zshrc='$EDITOR ~/.zshrc'
-alias vimrc='$EDITOR ~/.vimrc'
-# }}}
-
-# Searching {{{
-alias grep='grep --color'
-alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,CVS} '
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
-# }}}
-
-# Better time
-alias time='/usr/bin/time -f "%C\nTime: %E real,\t%U user,\t%S sys\nSize: %K memory,\t%t set size,\t%X shared text\nCPU: %P"'
-
-alias t='tail -f'
-
-# Command line head / tail shortcuts
-alias -g H='| head'
-alias -g T='| tail'
-alias -g G='| grep'
-alias -g L="| less"
-alias -g M="| most"
-alias -g LL="2>&1 | less"
-alias -g CA="2>&1 | cat -A"
-alias -g NE="2> /dev/null"
-alias -g NUL="> /dev/null 2>&1"
-alias -g P="2>&1| pygmentize -l pytb"
-
-alias dud='du -d 1 -h'
-alias duf='du -sh *'
-
-alias h='history'
-alias hgrep="fc -El 0 | grep"
-alias help='man'
-alias p='ps -f'
-alias sortnr='sort -n -r'
-alias unexport='unset'
-
-alias whereami=display_info
-
-# Interactive copy/move {{{
-# rm not present because rm drives me nuts.
-alias cp='cp -i'
-alias mv='mv -i'
-# }}}
-
-# }}}
-
-# Lists the ten most used commands.
-alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
-
-# zsh is able to auto-do some kungfoo {{{
-# depends on the SUFFIX :)
-if [ ${ZSH_VERSION//\./} -ge 420 ]; then
-  # open browser on urls
-  _browser_fts=(htm html de org net com at cx nl se dk dk php)
-  for ft in $_browser_fts ; do alias -s $ft=$BROWSER ; done
-
-  _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
-  for ft in $_editor_fts ; do alias -s $ft=$EDITOR ; done
-
-  _image_fts=(jpg jpeg png gif mng tiff tif xpm)
-  for ft in $_image_fts ; do alias -s $ft=$XIVIEWER; done
-
-  _media_fts=(ape avi flv mkv mov mp3 mpeg mpg ogg ogm rm wav webm)
-  for ft in $_media_fts ; do alias -s $ft=mplayer ; done
-
-  #read documents
-  alias -s pdf=xdg-open
-  alias -s ps=xdg-open
-  alias -s dvi=xdg-open
-  alias -s chm=xdg-open
-  alias -s djvu=xdg-open
-
-  #list whats inside packed file
-  alias -s zip="unzip -l"
-  alias -s rar="unrar l"
-  alias -s tar="tar tf"
-  alias -s tar.gz="echo "
-  alias -s ace="unace l"
-fi
-# Make zsh know about hosts already accessed by SSH
-zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-# }}}
-
-# Tmux {{{
-alias tmux='tmux -2'  # Force 256 colors
-alias ta='tmux attach -t'
-alias ts='tmux new-session -s'
-alias tl='tmux list-sessions'
-alias tk='tmux kill-server'
-# }}}
-
-# Git {{{
-
-# Cherry picked from OMZ git plugin.
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
-
-alias g='git'
-alias ga='git add'
-alias gc='git commit -v'
-alias gcl='git clone --recursive'
-alias gcm='git checkout master'
-alias gco='git checkout'
-alias gd='git diff'
-alias gf='git fetch'
-alias gfa='git fetch --all --prune'
-alias gg='git gui citool'
-alias gl='git pull'
-alias glg='git log --stat'
-alias glgp='git log --stat -p'
-alias glgg='git log --graph'
-alias glgga='git log --graph --decorate --all'
-alias glgm='git log --graph --max-count=10'
-alias glo='git log --oneline --decorate'
-alias glol="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glola="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glog='git log --oneline --decorate --graph --all'
-alias gm='git merge'
-alias gp='git push'
-alias gpd='git push --dry-run'
-alias gr='git remote'
-alias gra='git remote add'
-alias grb='git rebase'
-alias grba='git rebase --abort'
-alias grbc='git rebase --continue'
-alias grbi='git rebase -i'
-alias grbm='git rebase master'
-alias grbs='git rebase --skip'
-alias grh='git reset HEAD'
-alias grhh='git reset HEAD --hard'
-alias grmv='git remote rename'
-alias grrm='git remote remove'
-alias grset='git remote set-url'
-alias gsb='git status -sb'
-alias gss='git status -s'
-alias gst='git status'
-alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
-
-# }}}
-
-# Create yup alias to call thefuck.
-# I prefer not to pollute history with profanity.
-# To get new alias, run `thefuck --alias yup`.
-# An eval around this command would suffice here, but I'd rather
-# cache than execute. Shaves a hair off startup time.
-#
-# Lead space should keep yup command out of history, if history
-# set up right.
-alias yup=' TF_CMD=$(TF_ALIAS=yup PYTHONIOENCODING=utf-8 TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) && eval $TF_CMD && print -s $TF_CMD'
-
-# Always use vim
-alias vi="vim"
-
-# Ack
-alias ack='ack-grep'
-
-# Let scheme use readline
-alias scheme='rlwrap -rc mit-scheme'
-
-# Use system sqlite3 instead of the anaconda one that doesn't support
-# readline
-alias sqlite3='/usr/bin/sqlite3'
-alias sqlite="sqlite3"
-
-
-# Rsync {{{
-# Stolen without shame from oh-my-zsh rsync plugin
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/rsync/rsync.plugin.zsh
-#
-alias rsync-copy="rsync -avz --progress -h"
-alias rc='rsync-copy'
-alias rsync-move="rsync -avz --progress -h --remove-source-files"
-alias rsync-update="rsync -avzu --progress -h"
-alias rsync-sync="rsync -avzu --delete --progress -h"
-# }}}
-
-alias sl='sl -e'
-
-# Vagrant/Ansible/GCloud Aliases {{{
-# Vagrant ansible
-VAGRANT_DEFAULT_KEY=.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory
-alias van="ANSIBLE_HOST_KEY_CHECKING=False ansible --inventory=${VAGRANT_DEFAULT_KEY}"
-alias van-playbook="ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory=${VAGRANT_DEFAULT_KEY}"
-alias gan="ANSIBLE_HOST_KEY_CHECKING=False ansible --private-key=$HOME/.ssh/google_compute_engine"
-alias gan-playbook="ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key=$HOME/.ssh/google_compute_engine"
-# }}}
 
 # }}}
 
@@ -585,15 +376,58 @@ bindkey '^Z' fancy-ctrl-z
 
 # }}}
 
+# Aliases {{{
+
+# Load aliases file {{{
+
+if [[ -f $HOME/.aliasrc ]]; then
+    source $HOME/.aliasrc
+fi
+
+# }}}
+
+# zsh is able to auto-do some kungfoo {{{
+# depends on the SUFFIX :)
+if [ ${ZSH_VERSION//\./} -ge 420 ]; then
+  # open browser on urls
+  _browser_fts=(htm html de org net com at cx nl se dk dk php)
+  for ft in $_browser_fts ; do alias -s $ft=$BROWSER ; done
+
+  _editor_fts=(cpp cxx cc c hh h inl asc txt TXT tex)
+  for ft in $_editor_fts ; do alias -s $ft=$EDITOR ; done
+
+  _image_fts=(jpg jpeg png gif mng tiff tif xpm)
+  for ft in $_image_fts ; do alias -s $ft=$XIVIEWER; done
+
+  _media_fts=(ape avi flv mkv mov mp3 mpeg mpg ogg ogm rm wav webm)
+  for ft in $_media_fts ; do alias -s $ft=mplayer ; done
+
+  #read documents
+  alias -s pdf=xdg-open
+  alias -s ps=xdg-open
+  alias -s dvi=xdg-open
+  alias -s chm=xdg-open
+  alias -s djvu=xdg-open
+
+  #list whats inside packed file
+  alias -s zip="unzip -l"
+  alias -s rar="unrar l"
+  alias -s tar="tar tf"
+  alias -s tar.gz="echo "
+  alias -s ace="unace l"
+fi
+# Make zsh know about hosts already accessed by SSH
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+# }}}
+
+# /Aliases }}}
+
 # Oh-My-Zsh Copied Plugins {{{
 
 # A number of Oh-My-Zsh plugins are nothing but alias and
 # function definitions. For the ones I wanted I've copied them
 # inline to prevent having to pull in all of OMZ just for that
 # simple plugin.
-#
-# zplug "plugins/git", from:oh-my-zsh, defer:2
-# zplug "plugins/git-extras", from:oh-my-zsh
 
 # fasd {{{
 
@@ -642,5 +476,13 @@ colorize_via_pygmentize() {
 }
 
 # }}}
+
+# }}}
+
+# Load Local Configs {{{
+
+if [[ -f $HOME/.zshrc.local ]]; then
+    source $HOME/.zshrc.local
+fi
 
 # }}}
