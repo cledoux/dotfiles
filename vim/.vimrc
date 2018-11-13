@@ -20,8 +20,8 @@
 " Purpose of this was to allow me to source my company's provided
 " vimrc without committing it to version control. I want my
 " configuration to overwrite the company's configuration.
-if !empty(glob("~/.vimrc_local"))
-    source "~/.vimrc_local"
+if !empty(glob("~/.vimrc.local"))
+    source ~/.vimrc.local
 endif
 
 " Install vim-plug if it is missing {{{
