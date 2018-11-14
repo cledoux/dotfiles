@@ -10,6 +10,9 @@
 "   Suggestions and bugs can be emailed to charles@charlesledoux.com
 " }}}
 
+" Full list of supported set options at:
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+
 " Editor options {{{
 " Turn on line numbers
 set number
