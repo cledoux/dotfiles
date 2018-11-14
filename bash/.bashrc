@@ -59,6 +59,10 @@ bind "set completion-map-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
+# Tab through the possible completions for ambiguous patterns
+# This works more like vim tab complete than zsh.
+# bind 'TAB:menu-complete'
+
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind "set mark-symlinked-directories on"
 
