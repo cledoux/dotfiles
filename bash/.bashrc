@@ -145,6 +145,9 @@ HISTFILESIZE=2000
 # Preferred defaults
 EDITOR=vim
 
+# Local path overrides system.
+PATH="$HOME/.local/bin:$PATH"
+
 #}}}
 
 # Aliases {{{
