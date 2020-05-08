@@ -446,17 +446,17 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " " {{{ Syntastic
 " " ----- scrooloose/syntastic settings -----
 " " Fancy!
-" let g:syntastic_error_symbol = '✘'
-" let g:syntastic_warning_symbol = "▲"
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
 " " Config for latex
 " augroup mySyntastic
 "  au!
 "  au FileType tex let b:syntastic_mode = "passive"
 " augroup END
 " " Use python3 checker
-" let g:syntastic_python_python_exec = "python3"
+let g:syntastic_python_python_exec = "python3"
 " " Select checkers
-" let g:syntastic_python_checkers = ['python', 'pylama']
+let g:syntastic_python_checkers = ['python', 'pylama']
 " " Turn off line too long warnings
 " let g:syntastic_python_pylama_args='--ignore=E501'
 " " Recommended defaults for beginners

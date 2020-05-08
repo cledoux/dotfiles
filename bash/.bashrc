@@ -153,6 +153,17 @@ export GOPATH="$HOME/.local/go"
 
 #}}}
 
+# Go Configuration {{{
+# The installation directory of go.
+export PATH="$PATH:$HOME/.local/go/golang/bin"
+# Path to store code in.
+export GOPATH="$HOME/.local/go/local"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
+# All other environment configs are stored at this location.
+export GOENV="$HOME/.local/go/config"
+# }}}
+
 # Aliases {{{
 
 # Load common alias file.
@@ -280,6 +291,7 @@ if ! shopt -oq posix; then
 fi
 
 # }}}
+
 
 # Load local overrides last.
 [[ -e "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
