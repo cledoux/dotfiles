@@ -7,6 +7,16 @@ not be directly shared with anyone.
 
 # Troubleshooting
 
+## I don't see any files
+
+`ls -a`
+
+These are dotfiles. Normal `ls` doesn't show dotfiles.
+
+There's an autoenv config here for overwriting the behavior of `ls` when in
+this directory. It's probably not worth installing autoenv just for
+this, though.
+
 ## Vim and/or tmux is too old
 Install the following repo:
 
