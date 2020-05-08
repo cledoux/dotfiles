@@ -143,10 +143,13 @@ HISTFILESIZE=2000
 # Environment {{{
 
 # Preferred defaults
-EDITOR=vim
+export EDITOR=vim
 
 # Local path overrides system.
-PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/go/bin:$PATH"
+
+# Put go files in the local directory.
+export GOPATH="$HOME/.local/go"
 
 #}}}
 
@@ -176,6 +179,17 @@ alias ga='git add'
 alias gl='git pull'
 alias gp='git push'
 alias gst='git status'
+
+# Golang aliases
+alias gofind="find -type f -name '*.go'"
+alias gofix="gofind | xargs goimports -w"
+alias gosimple="gofind | xargs gofmt -s -w"
+# glaze needs to come last in case the formatted removes imports.
+alias goall="gofix && gosimple && glaze ... "
+
+
+# HG (Mercurial) aliases
+alias hgmark='hg resolve --mark'
 
 # }}}
 
