@@ -1,10 +1,7 @@
 tags
 
-# Hide files encrypted by git secret.
-# Only hide the unencrypted files.
-private/.ssh/config
-private/.pypirc
-private/.gem/credentials
+# Hide my google specific configs.
+google/*
 
 # Generated files
 *.pyc
