@@ -75,7 +75,7 @@ shopt -s histappend
 shopt -s cmdhist
 
 # Record each line as it gets issued
-PROMPT_COMMAND='history -a'
+# PROMPT_COMMAND='history -a'
 
 # Huge history. Doesn't appear to slow things down, so why not?
 HISTSIZE=500000
@@ -295,3 +295,4 @@ fi
 
 # Load local overrides last.
 [[ -e "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
+
