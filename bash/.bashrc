@@ -191,6 +191,18 @@ alias gl='git pull'
 alias gp='git push'
 alias gst='git status'
 
+# HG aliases
+alias hadd='hg add'
+alias hc='hg commit'
+alias ha='hg amend'
+alias hl='hg xl'
+alias hu='hg uploadchain'
+alias hua='hg amend && hg uploadchain'
+alias hau='hg amend && hg uploadchain'
+alias hs='hg status'
+alias hco='hg checkout'
+alias hfix='hg fix'
+
 # Golang aliases
 alias gofind="find -type f -name '*.go'"
 alias gofix="gofind | xargs goimports -w"
@@ -198,9 +210,6 @@ alias gosimple="gofind | xargs gofmt -s -w"
 # glaze needs to come last in case the formatted removes imports.
 alias goall="gofix && gosimple && glaze ... "
 
-
-# HG (Mercurial) aliases
-alias hgmark='hg resolve --mark'
 
 # }}}
 
@@ -244,22 +253,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\n\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -292,6 +285,8 @@ fi
 
 # }}}
 
+# Load the prompt
+[[ -e "$HOME/.bashrc.prompt" ]] && source "$HOME/.bashrc.prompt"
 
 # Load local overrides last.
 [[ -e "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
