@@ -63,11 +63,11 @@ alias mv='mv -i'
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
 # Tmux {{{
-alias tmux='tmx -2' # Use the setup script and force 256 colors
-alias ta='tmx attach -t'
-alias ts='tmx new-session -s'
-alias tl='tmx list-sessions'
-alias tk='tmx kill-server'
+alias tmux='tmux-wrapper -2' # Use the setup script and force 256 colors
+alias ta='tmux-wrapper attach -t'
+alias ts='tmux-wrapper new-session -s'
+alias tl='tmux-wrapper list-sessions'
+alias tk='tmux-wrapper kill-server'
 # }}}
 
 # Git {{{
