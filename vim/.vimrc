@@ -46,8 +46,11 @@ Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" Put git info in statusline
+Plug 'airblade/vim-gitgutter'
+
 " Seamless switching between tmux and vim splits
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'christoomey/vim-tmux-navigator'
 
 " Filetype for tmux plugin
 Plug 'tmux-plugins/vim-tmux'
@@ -55,14 +58,11 @@ Plug 'tmux-plugins/vim-tmux'
 " Get the focus-events to work correctly in tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" Put git info in statusline
-Plug 'airblade/vim-gitgutter'
-
 " " File exploration in VIM!
 " Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs', {'on': 'NERDTreeToggle'}
 
 " Syntax checking
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 
 " " Use zeal from vim.
 " Plug 'KabbAmine/zeavim.vim'
@@ -99,23 +99,26 @@ Plug 'tomtom/tcomment_vim'
 
 " Latex editing goodness
 " Plug 'LaTeX-Box-Team/LaTeX-Box'
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 " Enable if folding becomes slow.
 " https://github.com/Konfekt/FastFold
 
 " Pandoc syntax and plugin
 " Don't use this and the markdown plugin
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Dockerfile syntax
-Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+" Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " Logstash
-Plug 'robbles/logstash.vim'
+" Plug 'robbles/logstash.vim'
 
 " Prose Linter.
-Plug 'amperser/proselint' , {'rtp': '/plugins/vim/syntastic_proselint'}
+" Plug 'amperser/proselint' , {'rtp': '/plugins/vim/syntastic_proselint'}
+
+" Jsonnet syntax
+Plug 'google/vim-jsonnet'
 
 " My customizations
 " Using full git url so can push changes directly.
@@ -358,6 +361,18 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 " Turn on full backspace support
 set backspace=indent,eol,start
+
+" copy to attached terminal using the yank(1) script:
+" https://github.com/sunaku/home/blob/master/bin/yank
+function! Yank(text) abort
+  let escape = system('yank', a:text)
+  if v:shell_error
+    echoerr escape
+  else
+    call writefile([escape], '/dev/tty', 'b')
+  endif
+endfunction
+noremap <silent> <Leader>y y:<C-U>call Yank(@0)<CR>
 " }}}
 
 " Plugin Options {{{
