@@ -145,23 +145,26 @@ HISTFILESIZE=2000
 # Preferred defaults
 export EDITOR=vim
 
-# Local path overrides system.
-export PATH="$HOME/.local/bin:$HOME/.local/go/bin:$PATH"
+# Include snap directory in path if it exists.
+if [[ -e "/snap/bin" ]]; then
+    export PATH="$PATH:/snap/bin"
+fi
 
-# Put go files in the local directory.
-export GOPATH="$HOME/.local/go"
+# Local path overrides system.
+export PATH="$HOME/.local/bin:$PATH"
 
 #}}}
 
 # Go Configuration {{{
-# The installation directory of go.
-export PATH="$PATH:$HOME/.local/go/golang/bin"
-# Path to store code in.
-export GOPATH="$HOME/.local/go/local"
+
+# Add location of go files.
+export GOPATH="$HOME/.local/go"
+# Add go binaries to path.
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
 # All other environment configs are stored at this location.
-export GOENV="$HOME/.local/go/config"
+export GOENV="$GOPATH/config"
+
 # }}}
 
 # Aliases {{{
