@@ -15,7 +15,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 packages=$(find . -maxdepth 1 -type d ! -name '.git*' ! -name '.' !  -name 'bin' -printf "%f\n")
 
 for p in $packages; do
-    $STOW -vv --target=$HOME $@ $p
+    stow -vv --target=$HOME $@ $p
 done
 
 echo "Done."
