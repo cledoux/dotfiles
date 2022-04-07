@@ -171,7 +171,8 @@ if [[ -n "$TMUX" ]]; then
 				eval export $v
 			fi
 		done < <(tmux show-environment)
-        # Reload prompt because it is based on some environment variables        [[ -e "$HOME/.bashrc.prompt" ]] && source "$HOME/.bashrc.prompt"
+        # Reload prompt because it is based on some environment variables
+        [[ -e "$HOME/.bashrc.prompt" ]] && source "$HOME/.bashrc.prompt"
 	}
 else
     # Define the function as a nop outside of tmux so we can set
