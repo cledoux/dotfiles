@@ -20,9 +20,9 @@ esac
 
 # Unique Bash version check
 if ((BASH_VERSINFO[0] < 4))
-then 
-  echo "sensible.bash: Looks like you're running an older version of Bash." 
-  echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly." 
+then
+  echo "sensible.bash: Looks like you're running an older version of Bash."
+  echo "sensible.bash: You need at least bash-4.0 or some options will not work correctly."
   echo "sensible.bash: Keep your software up-to-date!"
 fi
 
@@ -153,6 +153,35 @@ fi
 # Local path overrides system.
 export PATH="$HOME/.local/bin:$PATH"
 
+# refresh function to reload environment variables in tmux.
+# If updating the list of variables, also need to update the
+# `set -g update-environment` command in tmux.conf
+# The update-environment config will reload the variables into
+# tmux on reattach.  This function will load the variables into
+# the shell.
+if [[ -n "$TMUX" ]]; then
+	# https://raimue.blog/2013/01/30/tmux-update-environment/
+	function refresh() {
+		local v
+		while read v; do
+			if [[ $v == -* ]]; then
+				unset ${v/#-/}
+			else
+				# Add quotes around the argument
+				v=${v/=/=\"}
+				v=${v/%/\"}
+				eval export $v
+			fi
+		done < <(tmux show-environment)
+        # Reload prompt because it is based on some environment variables
+        [[ -e "$HOME/.bashrc.prompt" ]] && source "$HOME/.bashrc.prompt"
+	}
+else
+    # Define the function as a nop outside of tmux so we can set
+    # this function to automatically run (e.g. in a preexec) without fear.
+    refresh(){ :; }
+fi
+
 #}}}
 
 # Go Configuration {{{
@@ -235,26 +264,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-      # We have color support; assume it's compliant with Ecma-48
-      # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-      # a case would tend to support setf rather than setaf.)
-      color_prompt=yes
-    else
-      color_prompt=
-    fi
-fi
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
