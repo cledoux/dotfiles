@@ -7,6 +7,7 @@
 	subup = submodule foreach "git checkout master; git pull"
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
