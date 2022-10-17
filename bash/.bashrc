@@ -162,6 +162,7 @@ export PATH="$HOME/.local/bin:$PATH"
 if [[ -n "$TMUX" ]]; then
 	# https://raimue.blog/2013/01/30/tmux-update-environment/
 	function refresh() {
+        cd .
 		local v
 		while read v; do
 			if [[ $v == -* ]]; then
