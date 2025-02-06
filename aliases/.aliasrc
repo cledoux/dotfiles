@@ -151,3 +151,6 @@ alias rsync-sync="rsync -avzu --delete --progress -h"
 # }}}
 
 alias sl='sl -e'
+
+alias gcurl='curl -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" -H "x-goog-user-project: ${PROJECT_ID:-simulator-test-project}" -H "Content-Type: application/json"'
+
