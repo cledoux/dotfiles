@@ -11,8 +11,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 # Stow comm# List packages to stow.
 # Grabs all directories out of the current directory.
-# Ignores the '.' indicator, all .git* directories, and ./bin.
-packages=$(find . -maxdepth 1 -type d ! -name '.git*' ! -name '.' !  -name 'bin' -printf "%f\n")
+# Ignores the '.' indicator, all .git* directories, the archived
+# configs, and ./bin.
+packages=$(find . -maxdepth 1 -type d ! -name '.git*' ! -name '.' !  -name 'bin' ! name 'archive' -printf "%f\n")
 
 for p in $packages; do
     stow -vv --target=$HOME $@ $p

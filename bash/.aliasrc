@@ -1,18 +1,19 @@
-# vim: foldmethod=marker foldmarker={{{,}}} tw=65:
+# vim: foldmethod=marker foldmarker={{{,}}} tw=65 filetype=sh:
 # This file is sourced by both bashrc and zshrc.
 # Lets me define aliases in a single place
 
 # Common Aliases {{{
 # Based on OMZ Common Aliases Plugin
+# Includes some customizations based on my preferences.
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/common-aliases/common-aliases.plugin.zsh
 
 # ls {{{
 alias ls='ls --color=auto' # I prefer this over --color=tty
-alias l='ls -lFh'          #size,show type,human readable
-alias la='ls -lAFh'        #long list,show almost all,show type,human readable
+alias l='ls -CF'
+alias la='ls -A'
 alias lr='ls -tRFh'        #sorted by date,recursive,show type,human readable
 alias lt='ls -ltFh'        #long list,sorted by date,show type,human readable
-alias ll='ls -lh'          #long list
+alias ll='ls -alhF'
 alias ldot='ls -ld .*'
 alias lS='ls -1FSsh'
 alias lart='ls -1Fcart'
@@ -72,7 +73,7 @@ alias tk='tmux-wrapper kill-server'
 
 # Git {{{
 
-# Cherry picked from OMZ git plugin.
+# Cherry picked from OMZ git plugin with a few personal additions.
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
 
 alias g='git'
@@ -98,6 +99,7 @@ alias glog='git log --oneline --decorate --graph --all'
 alias gm='git merge'
 alias gp='git push'
 alias gpd='git push --dry-run'
+alias gpnp='git pull && git push'
 alias gr='git remote'
 alias gra='git remote add'
 alias grb='git rebase'
@@ -116,8 +118,24 @@ alias gss='git status -s'
 alias gst='git status'
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 
+
+
 # }}}
 
+# HG {{{
+alias hadd='hg add'
+alias hc='hg commit'
+alias ha='hg amend'
+alias hl='hg xl'
+alias hu='hg uploadchain'
+alias hua='hg amend && hg uploadchain'
+alias hau='hg amend && hg uploadchain'
+alias hs='hg status'
+alias hco='hg checkout'
+alias hfix='hg fix'
+# }}}
+
+# VIM {{{
 # Always use vim
 # On redhat, vimx is the vim with gui support
 if [ -e /usr/bin/vimx ]; then
@@ -127,13 +145,25 @@ else
     # Never use vi, always vim
     alias vi='vim'
 fi
+# }}}
+
+# SSH {{{
+# Open a tunnel.  Used for connection reuse
+alias sshopen='ssh -f -N'
+# List open sockets
+alias sshsocks='ls ~/.ssh/sockets'
+# Create reverse SSH
+alias sshrev='ssh -f -N -R 9999:localhost:22'
+# }}}
 
 # Ack
 alias ack='ack-grep'
 
+# Scheme
 # Let scheme use readline
 alias scheme='rlwrap -rc mit-scheme'
 
+# SQLITE
 # Use system sqlite3 instead of the anaconda one that doesn't support
 # readline
 alias sqlite3='/usr/bin/sqlite3'
@@ -153,4 +183,12 @@ alias rsync-sync="rsync -avzu --delete --progress -h"
 alias sl='sl -e'
 
 alias gcurl='curl -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" -H "x-goog-user-project: ${PROJECT_ID:-simulator-test-project}" -H "Content-Type: application/json"'
+
+# Golang {{{
+alias gofind="find -type f -name '*.go'"
+alias gofix="gofind | xargs goimports -w"
+alias gosimple="gofind | xargs gofmt -s -w"
+# glaze needs to come last in case the formatted removes imports.
+alias goall="gofix && gosimple && glaze ... "
+# }}}
 
