@@ -1,4 +1,8 @@
 # vim: noexpandtab:
+
+# References
+# - https://blog.gitbutler.com/how-git-core-devs-configure-git/?utm_source=hackernewsletter&utm_medium=email&utm_term=code
+
 [user]
 	name = Charles LeDoux
 	email = charles@ledoux.email
@@ -12,8 +16,25 @@
 	editor = vim
 	excludesfile = ~/.gitignore_global
 	autocrlf = input
+	# Set the following two for larger repos to enable faster
+	# status.Creates a file system monitor *per repo*, so I have
+	# this off for the global config.
+	# fsmonitor = true
+	# untrackedCache = true
 [push]
 	default = simple
+	autoSetupRemote = true
+	followTags = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
 [color]
 	branch = auto
 	diff = auto
@@ -23,6 +44,10 @@
 	submoduleSummary = true
 [diff]
 	tool = vimdiff
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [merge]
 	tool = vimdiff
 [difftool]
@@ -38,3 +63,19 @@
 	helper = lastpass
 [commit]
 	template = ~/.gitmessage
+	verbose = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[help]
+	autocorrect = prompt
+[rerere]
+	enabled = true
+	autoupdate = true
+
+# a matter of taste (uncomment if you dare)
+
+[core]
