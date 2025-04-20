@@ -148,6 +148,9 @@ fi
 # Local path overrides system.
 export PATH="$HOME/.local/bin:$PATH"
 
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # refresh function to reload environment variables in tmux.
 # If updating the list of variables, also need to update the
 # `set -g update-environment` command in tmux.conf
