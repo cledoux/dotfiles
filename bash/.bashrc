@@ -73,3 +73,5 @@ fi
 # Load local overrides last.
 [[ -e "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
 
+# Load in locally stored sensitive variables.
+[[ -e "$HOME/.bashrc.secrets" ]] && source "$HOME/.bashrc.secrets"
