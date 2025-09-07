@@ -186,7 +186,8 @@ fi
 # Go Configuration {{{
 
 # Add location of go files.
-export GOPATH="$HOME/.local/go"
+export GOROOT="$HOME/.local/go"
+export GOPATH="/usr/local/go"
 # Add go binaries to path.
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
