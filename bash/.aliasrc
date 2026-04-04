@@ -192,3 +192,4 @@ alias gosimple="gofind | xargs gofmt -s -w"
 alias goall="gofix && gosimple && glaze ... "
 # }}}
 
+alias cld='claude'
