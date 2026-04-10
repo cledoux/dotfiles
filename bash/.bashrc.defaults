@@ -181,6 +181,9 @@ else
     refresh(){ :; }
 fi
 
+# Enable easier flatpak integration
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/ledoux/.local/share/flatpak/exports/share"
+
 #}}}
 
 # Go Configuration {{{
