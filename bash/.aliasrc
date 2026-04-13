@@ -193,3 +193,6 @@ alias goall="gofix && gosimple && glaze ... "
 # }}}
 
 alias cld='claude'
+alias cc='claude'
+
+alias j='justfile'
