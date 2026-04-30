@@ -69,6 +69,15 @@ alias ta='tmux-wrapper attach -t'
 alias ts='tmux-wrapper new-session -s'
 alias tl='tmux-wrapper list-sessions'
 alias tk='tmux-wrapper kill-server'
+
+if [ -n "$BASH_VERSION" ]; then
+    _tmux_sessions_completion() {
+        local cur="${COMP_WORDS[COMP_CWORD]}"
+        local sessions=$(tmux-wrapper list-sessions -F "#{session_name}" 2>/dev/null)
+        COMPREPLY=( $(compgen -W "${sessions}" -- "$cur") )
+    }
+    complete -F _tmux_sessions_completion ta
+fi
 # }}}
 
 # Git {{{
